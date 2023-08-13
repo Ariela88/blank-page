@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blank-Page</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="./showdown-2.1.0/dist/showdown.min.js"></script>
+
+</head>
+
+<body class="dark">
+    <header>
+        <div class="header-btn">
+            <button onclick="fullscreenWindow()"><img src="./public/Octicons-screen-full.svg" alt="" srcset=""></button>
+            <button id="themeButton" onclick="changeTheme()">
+                <img id="themeIcon" src="./public/Brush_-_The_Noun_Project.svg" alt="Tema scuro">
+            </button>
+
+
+            <button onclick="previewDoc()"><img src="./public/Ionicons_glasses-outline.svg" alt="" srcset=""></button>
+            <button onclick="download()"> <img src="public/Download_(89523)_-_The_Noun_Project.svg" alt="" srcset="">
+            </button>
+        </div>
+    </header>
+        <div class="main">
+            <div class="hidden" id="preview-space"></div>
+            <div contenteditable id="text-space">
+
+            </div>
+
+        </div>
+        <footer>
+            <div class="count-div">
+                <p id="count-chars"></p>
+                <p id="count-words"></p>
+            </div>
+        </footer>
+    
+
+
+    <script src="./app.js"></script>
+
+</body>
+
+</html>
