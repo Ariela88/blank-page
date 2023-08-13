@@ -10,17 +10,25 @@ function changeTheme() {
     const themeButton = document.getElementById('themeButton');
     const themeIcon = document.getElementById('themeIcon');
 
+    let currentTheme = 'dark';
     if (body.className === 'dark') {
         body.className = 'purple';
-        themeIcon.src = './public/Brush_-_The_Noun_Project.svg'; 
+        themeIcon.src = './public/Brush_-_The_Noun_Project.svg';
+        currentTheme = 'purple';
     } else if (body.className === 'purple') {
         body.className = 'light';
         themeIcon.src = './public/OOjs_UI_icon_sun-ltr.svg';
+        currentTheme = 'light';
     } else {
         body.className = 'dark';
-        themeIcon.src = './public/Moon_symbol_decrescent.svg'; 
+        themeIcon.src = './public/moon-dark.svg';
+        currentTheme = 'dark';
     }
+
+
+    localStorage.setItem('theme', currentTheme);
 }
+
 
 function saveTextToLocalStorage() {
     const textDivContent = textSpace.innerHTML;
@@ -31,6 +39,10 @@ function loadTextFromLocalStorage() {
     const savedText = localStorage.getItem('textContent');
     if (savedText) {
         textSpace.innerHTML = savedText;
+    }
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+        body.className = savedTheme;
     }
 }
 
@@ -108,13 +120,39 @@ function previewDoc() {
 
     previewSpace.innerHTML = convertedText;
     isHtml = !isHtml;
+    document.getElementById('preview-space').style.display = 'block'
+    document.getElementById('text-space').style.display = 'none'
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    textSpace.addEventListener('input', () => {
-        saveTextToLocalStorage();
-        updateCharCount();
-        updateWordCount();
-        previewDoc();
-    });
+textSpace.addEventListener('input', () => {
+    saveTextToLocalStorage();
+    updateCharCount();
+    updateWordCount();
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    loadTextFromLocalStorage();
+    updateCharCount();
+    updateWordCount();
+});
+
+function downloadHtml() {
+    const previewContent = previewSpace.innerHTML;
+    const htmlContent = `<!DOCTYPE html>\n<html>\n<head>\n<title>Tuo Titolo</title>\n</head>\n<body>\n${previewContent}\n</body>\n</html>`;
+
+    const blob = new Blob([htmlContent], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+
+    const downloadLink = document.createElement('a');
+    downloadLink.href = url;
+    downloadLink.download = 'preview.html';
+
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+
+    URL.revokeObjectURL(url);
+    document.body.removeChild(downloadLink);
+}
+
+
+

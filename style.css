@@ -1,41 +1,140 @@
-.header-btn{
-    display: flex;
-    align-items: flex-end;
+@import url('https://fonts.googleapis.com/css2?family=Gochi+Hand&display=swap');
+
+
+
+button {
+    background-color: transparent;
+    border: none;
+
 }
 
-.light{
+
+.button-glow:hover {
+    animation: glowing 1500ms infinite;
+}
+
+@keyframes glowing {
+
+    0%,
+    100% {
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+    }
+
+    50% {
+        box-shadow: 0 0 20px rgba(143, 0, 156, 0.9);
+    }
+}
+
+.button-glow {
+    background-color: transparent;
+    border: none;
+    padding: 10px;
+    /* Aggiungi spazio per l'effetto di "glow" */
+    box-shadow: 0 0 10px rgba(0, 0, 255, 0);
+    /* Imposta un'ombra iniziale trasparente */
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.button-glow:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 255, 0.7);
+    /* Cambia l'ombra al passaggio del mouse */
+}
+
+
+
+.header-btn {
+    display: flex;
+    align-items: end;
+    justify-content: end;
+}
+
+.light {
     background-color: rgb(255, 219, 153);
     color: black;
 }
 
-.dark{
+.dark {
     background-color: #292929;
     color: white;
 }
 
-.purple{
+.purple {
     background-color: #5b0085;
     color: rgb(255, 255, 255);
 }
 
 
-img{
-    width: 20px;
-    color:blue;
+
+img {
+    width: 30px;
+
 }
 
-p{
-    font-size: 30px;
-    color: white;
+#text-space {
+    height: 500px;
+    width: 60%;
+    margin: auto;
+    background-color: #3f3f3f;
+    font-size: 24px;
 }
+
+#preview-space {
+    height: 500px;
+    width: 60%;
+    margin: auto;
+    background-color: #3f3f3f;
+    font-size: 24px;
+}
+
+
+
+
+
 
 .hidden {
     display: none;
-  }
+}
+
+.count-div {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: end;
+}
+
+.count-div p {
+    font-family: 'Gochi Hand', cursive;
+    margin: 0;
+}
 
 @media (max-width: 480px) {
 
-    .header-btn{
+
+
+    .main {
+
+        width: 80%;
+        padding: 40px;
+    }
+
+    #text-space {
+        width: 80%;
+        font-size: 20px;
+    }
+
+    #preview-space {
+
+        width: 90%;
+
+        font-size: 28px;
+    }
+
+    pre {
+        width: 90%;
+    }
+
+    .header-btn {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -46,9 +145,12 @@ p{
         gap: 10px;
     }
 
-    .count-div{
+    .count-div {
         display: flex;
-        align-items: center;
+        flex-direction: column;
+        margin-bottom: 30px;
+        margin-left: 30px;
+        align-items: flex-start;
         justify-content: space-evenly;
         position: fixed;
         bottom: 40px;
@@ -56,11 +158,18 @@ p{
         width: 100%;
     }
 
-    #text-space{
-        height: 100vh;
-        
+    .count-div p {
+        font-family: 'Gochi Hand', cursive;
+        margin: 0;
+        font-size: 24px;
     }
 
-    
-    
+    #text-space {
+        width: 90%;
+
+
+    }
+
+
+
 }
