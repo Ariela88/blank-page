@@ -120,11 +120,21 @@ img {
     margin: 0;
 }
 
+.dark .count-div{
+    color: rgb(91, 91, 91);
+}
+.light .count-div{
+    color: rgb(199, 163, 96);
+}
+
 
 
 @media (max-width: 480px) {
 
 
+    .dark{
+        color: white;
+    }
 
     .main {
 

@@ -14,16 +14,12 @@ function changeTheme() {
     if (body.className === 'dark') {
         body.className = 'light';
         themeButton.textContent = '☾'
-  
 
-    } else if (body.className === 'light') {
+
+    } else {
         body.className = 'dark';
         themeButton.textContent = '✹';
-     
-    // } else {
-    //     body.className = 'dark';
-    //     themeIcon.src = '☾';
-    //     currentTheme = 'dark';
+
     }
 
 
@@ -32,14 +28,14 @@ function changeTheme() {
 
 
 function saveTextToLocalStorage() {
-    const textDivContent = textSpace.innerHTML;
+    const textDivContent = textSpace.textContent; // Cambia da innerHTML a textContent
     localStorage.setItem('textContent', textDivContent);
 }
 
 function loadTextFromLocalStorage() {
     const savedText = localStorage.getItem('textContent');
     if (savedText) {
-        textSpace.innerHTML = savedText;
+        textSpace.textContent = savedText; // Cambia da innerHTML a textContent
     }
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme) {
@@ -49,9 +45,11 @@ function loadTextFromLocalStorage() {
 
 document.addEventListener('DOMContentLoaded', () => {
     loadTextFromLocalStorage();
+    updateCounts();  // Chiama updateCounts anche al caricamento
     updateCharCount();
     updateWordCount();
 });
+
 
 function download() {
     const textDivContent = textSpace.innerHTML;
@@ -83,8 +81,9 @@ function fullscreenWindow() {
 }
 
 function countChars() {
-    const textDivContent = textSpace.innerHTML;
+    const textDivContent = textSpace.innerText;
     const trimmedText = textDivContent.trim();
+    console.log(trimmedText)
     return trimmedText.length;
 }
 
@@ -94,9 +93,11 @@ function updateCharCount() {
 }
 
 function countWords() {
-    const textDivContent = textSpace.innerHTML;
+    const textDivContent = textSpace.innerText;
     const dataArray = textDivContent.trim().split(/\s+/);
     const wordArray = dataArray.filter(word => word !== '');
+    console.log(wordArray)
+  
     return wordArray.length;
 }
 
@@ -104,6 +105,17 @@ function updateWordCount() {
     const count = countWords();
     wordCountElement.textContent = `Numero di parole: ${count}`;
 }
+
+textSpace.addEventListener('input', updateCounts);
+textSpace.addEventListener('keydown', updateCounts);
+textSpace.addEventListener('keypress', updateCounts);
+
+function updateCounts() {
+    saveTextToLocalStorage();
+    updateCharCount();
+    updateWordCount();
+}
+
 
 function previewDoc() {
     const textContent = textSpace.textContent.trim();
@@ -125,17 +137,8 @@ function previewDoc() {
     document.getElementById('text-space').style.display = 'none'
 }
 
-textSpace.addEventListener('input', () => {
-    saveTextToLocalStorage();
-    updateCharCount();
-    updateWordCount();
-});
 
-document.addEventListener('DOMContentLoaded', () => {
-    loadTextFromLocalStorage();
-    updateCharCount();
-    updateWordCount();
-});
+
 
 function downloadHtml() {
     const previewContent = previewSpace.innerHTML;
