@@ -131,6 +131,10 @@ img {
 
 @media (max-width: 480px) {
 
+    .full-screen{
+        display: none;
+    }
+
 
     .dark{
         color: white;
@@ -139,13 +143,13 @@ img {
     .main {
 
         width: 80%;
-        padding: 40px;
+        padding: 40px 40px 0 40px;
     }
 
     #text-space {
         width: 80%;
         font-size: 20px;
-        margin: 0;
+        margin: auto;
     }
 
     #preview-space {
@@ -164,10 +168,10 @@ img {
         justify-content: center;
         align-items: center;
         position: fixed;
-        bottom: 10px;
+        top: 20px;
         left: 0;
         width: 100%;
-        gap: 10px;
+        gap: 40px;
     }
 
     .count-div {
@@ -175,17 +179,17 @@ img {
         flex-direction: column;
         margin-bottom: 30px;
        
-        align-items: center;
+        
         justify-content: center;
         position: fixed;
-        bottom: 40px;
+        bottom: 10px;
         z-index: 9999;
         width: 100%;
     }
 
     .count-div p {
         font-family: 'Gochi Hand', cursive;
-        margin: 0;
+        margin: auto;
         font-size: 24px;
     }
 
