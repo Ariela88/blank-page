@@ -76,12 +76,13 @@ img {
 #text-space {
     height: 500px;
     border: none;
-    margin: auto;
+    
     width: 70%;
     margin-left: 100px;
     font-size: 24px;
     font-family: 'Lugrasimo', cursive;
 }
+
 
 .html-icon{
     font-family: 'Vina Sans', cursive;
@@ -90,7 +91,7 @@ img {
 #preview-space {
     height: 500px;
     width: 60%;
-    margin: auto;
+    
     
     font-size: 24px;
 }
@@ -140,16 +141,18 @@ img {
         color: white;
     }
 
-    .main {
-
-        width: 80%;
-        padding: 40px 40px 0 40px;
+    .main{
+        margin: 0;
     }
 
+
     #text-space {
-        width: 80%;
+        
+        width: 90%;
         font-size: 20px;
-        margin: auto;
+        margin-top: 120px;
+        margin-left: 10px;
+       
     }
 
     #preview-space {
@@ -193,12 +196,7 @@ img {
         font-size: 24px;
     }
 
-    #text-space {
-        width: 90%;
-    
-
-
-    }
+   
 
     .dark button:active{
    

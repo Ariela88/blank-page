@@ -8,18 +8,15 @@ let isHtml = false;
 
 function changeTheme() {
     const themeButton = document.getElementById('themeButton');
-    const themeIcon = document.getElementById('themeIcon');
 
     let currentTheme = 'dark';
     if (body.className === 'dark') {
+        currentTheme = 'light'
         body.className = 'light';
         themeButton.textContent = '☾'
-
-
     } else {
         body.className = 'dark';
         themeButton.textContent = '✹';
-
     }
 
 
