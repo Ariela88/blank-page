@@ -12,17 +12,18 @@ function changeTheme() {
 
     let currentTheme = 'dark';
     if (body.className === 'dark') {
-        body.className = 'purple';
-        themeIcon.src = './public/Brush_-_The_Noun_Project.svg';
-        currentTheme = 'purple';
-    } else if (body.className === 'purple') {
         body.className = 'light';
-        themeIcon.src = './public/OOjs_UI_icon_sun-ltr.svg';
-        currentTheme = 'light';
-    } else {
+        themeButton.textContent = '☾'
+  
+
+    } else if (body.className === 'light') {
         body.className = 'dark';
-        themeIcon.src = './public/moon-dark.svg';
-        currentTheme = 'dark';
+        themeButton.textContent = '✹';
+     
+    // } else {
+    //     body.className = 'dark';
+    //     themeIcon.src = '☾';
+    //     currentTheme = 'dark';
     }
 
 
