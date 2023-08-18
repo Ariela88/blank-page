@@ -6,6 +6,7 @@ const previewSpace = document.getElementById('preview-space');
 const converter = new showdown.Converter();
 let isHtml = false;
 
+
 function changeTheme() {
     const themeButton = document.getElementById('themeButton');
 
@@ -130,8 +131,7 @@ function previewDoc() {
 
     previewSpace.innerHTML = convertedText;
     isHtml = !isHtml;
-    document.getElementById('preview-space').style.display = 'block'
-    document.getElementById('text-space').style.display = 'none'
+  
 }
 
 
