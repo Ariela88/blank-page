@@ -1,12 +1,16 @@
+
 const body = document.body;
 const textSpace = document.getElementById('text-space');
 const charCountElement = document.getElementById('count-chars');
 const wordCountElement = document.getElementById('count-words');
 const previewSpace = document.getElementById('preview-space');
-const converter = new showdown.Converter();
+const md = new window.markdownit();
 let isHtml = false;
+textSpace.addEventListener('input', updatePreview);
 
 
+
+//funzione per cambiare il tema 
 function changeTheme() {
     const themeButton = document.getElementById('themeButton');
 
@@ -25,15 +29,16 @@ function changeTheme() {
 }
 
 
+//funzione per salvare il testo nel local storage
 function saveTextToLocalStorage() {
-    const textDivContent = textSpace.textContent; // Cambia da innerHTML a textContent
+    const textDivContent = textSpace.textContent;
     localStorage.setItem('textContent', textDivContent);
 }
 
 function loadTextFromLocalStorage() {
     const savedText = localStorage.getItem('textContent');
     if (savedText) {
-        textSpace.textContent = savedText; // Cambia da innerHTML a textContent
+        textSpace.textContent = savedText;
     }
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme) {
@@ -41,14 +46,9 @@ function loadTextFromLocalStorage() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    loadTextFromLocalStorage();
-    updateCounts();  // Chiama updateCounts anche al caricamento
-    updateCharCount();
-    updateWordCount();
-});
 
 
+//funzione per scaricare il fil di testo in un documento txt
 function download() {
     const textDivContent = textSpace.innerHTML;
     const blob = new Blob([textDivContent], { type: 'text/plain' });
@@ -65,6 +65,8 @@ function download() {
     document.body.removeChild(downloadLink);
 }
 
+
+//funzione per visualizzare il documento in fullscreen mode
 function fullscreenWindow() {
     const element = document.documentElement;
     if (element.requestFullscreen) {
@@ -78,6 +80,8 @@ function fullscreenWindow() {
     }
 }
 
+//funzione per contare i caratteri e le parole in tempo reale
+
 function countChars() {
     const textDivContent = textSpace.innerText;
     const trimmedText = textDivContent.trim();
@@ -85,17 +89,20 @@ function countChars() {
     return trimmedText.length;
 }
 
+
+
 function updateCharCount() {
     const count = countChars();
     charCountElement.textContent = `Numero di caratteri: ${count}`;
 }
+
 
 function countWords() {
     const textDivContent = textSpace.innerText;
     const dataArray = textDivContent.trim().split(/\s+/);
     const wordArray = dataArray.filter(word => word !== '');
     console.log(wordArray)
-  
+
     return wordArray.length;
 }
 
@@ -103,6 +110,8 @@ function updateWordCount() {
     const count = countWords();
     wordCountElement.textContent = `Numero di parole: ${count}`;
 }
+
+
 
 textSpace.addEventListener('input', updateCounts);
 textSpace.addEventListener('keydown', updateCounts);
@@ -114,32 +123,50 @@ function updateCounts() {
     updateWordCount();
 }
 
+//--------------------------------------------------------------------------
 
-function previewDoc() {
-    const textContent = textSpace.textContent.trim();
-    let convertedText = '';
+// funzione per la visualizzazione di un anteprima in formaato markdown
 
-    if (isHtml) {
-        convertedText = converter.makeHtml(textContent);
-        textSpace.classList.remove('hidden');
-        previewSpace.classList.add('hidden');
-    } else {
-        convertedText = converter.makeMarkdown(textContent);
-        textSpace.classList.add('hidden');
+let isPreviewMode = false;
+function updatePreview() {
+    const markdownText = textSpace.textContent.trim();
+    const htmlText = md.render(markdownText);
+    previewSpace.innerHTML = htmlText;
+
+    if (isPreviewMode) {
+        textSpace.classList.add('hidden-text-space');
         previewSpace.classList.remove('hidden');
+    } else {
+        textSpace.classList.remove('hidden-text-space');
+        previewSpace.classList.add('hidden');
     }
-
-    previewSpace.innerHTML = convertedText;
-    isHtml = !isHtml;
-  
 }
+
+
+function togglePreview() {
+    isPreviewMode = !isPreviewMode;
+    updatePreview();
+}
+
+
+//funzione per scaricare il documento in formato html ncon già l'impostazione base
 
 
 
 
 function downloadHtml() {
     const previewContent = previewSpace.innerHTML;
-    const htmlContent = `<!DOCTYPE html>\n<html>\n<head>\n<title>Tuo Titolo</title>\n</head>\n<body>\n${previewContent}\n</body>\n</html>`;
+    const htmlContent = `<!DOCTYPE html>\n
+    <html lang="en">\n
+    <head>\n
+        <meta charset="UTF-8">\n
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">\n
+        <title>il mio documento </title>\n
+    </head>\n
+    <body>\n
+        ${previewContent}\n
+    </body>\n
+    </html>`;
 
     const blob = new Blob([htmlContent], { type: 'text/html' });
     const url = URL.createObjectURL(blob);
@@ -154,6 +181,14 @@ function downloadHtml() {
     URL.revokeObjectURL(url);
     document.body.removeChild(downloadLink);
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    loadTextFromLocalStorage();
+    updateCounts();
+    updateCharCount();
+    updateWordCount();
+    updatePreview();
+});
 
 
 

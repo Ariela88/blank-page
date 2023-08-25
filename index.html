@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blank-Page</title>
     <link rel="stylesheet" href="./style.css">
-    
+
     <script src="./showdown-2.1.0/dist/showdown.min.js"></script>
     <style>
-     
-        </style>
+
+    </style>
 
 </head>
 
@@ -20,27 +20,24 @@
             <button class="button-glow full-screen" onclick="fullscreenWindow()">
                 ⛶ </button>
             <button class="button-glow" id="themeButton" onclick="changeTheme()"> ✹
-                
+
             </button>
-            <button class="button-glow" onclick="downloadHtml()"> 
+            <button class="button-glow" onclick="downloadHtml()">
                 <span class="html-icon">html</span>
-                <!-- <img src="./public/HTML5_Badge.svg" alt="" srcset=""> -->
+
             </button>
 
-
-
-            <button class="button-glow" onclick="previewDoc()">🕶</button>
-            <button class="button-glow" onclick="download()"> 
-                🡓
-            </button>
+            <button class="button-glow" onclick="togglePreview()">🕶</button>
+            <button class="button-glow" onclick="download()">🡓</button>
 
         </div>
     </header>
     <div class="main">
+        <div placeholder="Type something..." contenteditable="true" id="text-space"></div>
         <div class="hidden" id="preview-space"></div>
-        <div placeholder="Type something..." contenteditable="true" id="text-space">
 
-        </div>
+
+    </div>
 
     </div>
     <footer>
@@ -51,8 +48,9 @@
     </footer>
 
 
-
+    <script src="https://cdn.jsdelivr.net/npm/markdown-it@12/dist/markdown-it.min.js"></script>
     <script src="./app.js"></script>
+
 
 </body>
 
