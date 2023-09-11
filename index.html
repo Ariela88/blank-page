@@ -17,7 +17,7 @@
 <body class="dark">
     <header>
         <div class="header-btn">
-            <button class="button-glow full-screen" onclick="fullscreenWindow()">
+            <button id="exit-fs" class="button-glow full-screen" onclick="fullscreenWindow()">
                 ⛶ </button>
             <button class="button-glow" id="themeButton" onclick="changeTheme()"> ✹
 
@@ -33,7 +33,7 @@
         </div>
     </header>
     <div class="main">
-        <div placeholder="Type something..." contenteditable="true" id="text-space"></div>
+        <div  contenteditable="true" id="text-space" placeholder="Type something..."></div>
         <div class="hidden" id="preview-space"></div>
 
 
